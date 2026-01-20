@@ -1,66 +1,68 @@
 import Image from "next/image";
-import styles from "./page.module.css";
+import Link from "next/link";
+import "./home.scss";
 
-export default function Home() {
+const movies = [
+  {
+    id: "1234",
+    slug: "side-el-nas", // 👈 ده المهم
+    title: "سيد الناس",
+    poster: "/movies/side_el_nas_poster.jpeg",
+    hero1: "/movies/side_el_nas_hero1.jpg",
+    hero2: "/movies/side_el_nas_hero2.jpg",
+    description: "مسلسل درامي اجتماعي مشوّق",
+  },
+];
+
+export default function HomePage() {
+  const featured = movies[0];
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
+    <main className="home">
+      {/* FEATURED HERO */}
+      <section className="featured">
         <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
+          src={featured.hero2}
+          alt={featured.title}
+          fill
           priority
         />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        <div className="featured-overlay" />
+
+        <div className="featured-content">
+          <h1>{featured.title}</h1>
+          <p>{featured.description}</p>
+
+          <Link
+            href={`/watch/${featured.slug}`}
+            className="watch-btn"
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            ▶ مشاهدة الآن
+          </Link>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* GRID */}
+      <section className="movies-grid">
+        {movies.map((movie) => (
+          <Link
+            key={movie.id}
+            href={`/watch/${movie.slug}`}
+            className="movie-card"
+          >
+            <div className="image-wrapper">
+              <Image
+                src={movie.poster}
+                alt={movie.title}
+                fill
+              />
+              <div className="overlay" />
+              <h3 className="movie-title">{movie.title}</h3>
+            </div>
+          </Link>
+        ))}
+      </section>
+    </main>
   );
 }
