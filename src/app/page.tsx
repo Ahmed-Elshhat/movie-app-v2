@@ -12,6 +12,15 @@ const movies = [
     hero2: "/movies/side_el_nas_hero2.jpg",
     description: "مسلسل درامي اجتماعي مشوّق",
   },
+  {
+    id: "1234",
+    slug: "el_serp", // 👈 ده المهم
+    title: "السرب",
+    poster: "/movies/el_serp_poster.jpeg",
+    hero1: "/movies/el_serp_poster.jpg",
+    hero2: "/movies/el_serp_poster.jpg",
+    description: "فيلم السرب",
+  },
 ];
 
 export default function HomePage() {
