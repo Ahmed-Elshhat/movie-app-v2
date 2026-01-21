@@ -473,9 +473,18 @@
 import { useState } from "react";
 import Link from "next/link";
 
-// هنا تقدر تمرر الحلقات حسب المسلسل أو الفيلم
-// لو فيلم، خلي المصفوفة فاضية []
-const episodesData: Record<string, any[]> = {
+interface Server {
+  name: string;
+  iframe: string;
+}
+
+interface Episode {
+  episodeNumber: number;
+  servers: Server[];
+}
+
+
+const episodesData: Record<string, Episode[]> = {
   "side-el-nas": [
     {
       episodeNumber: 1,
@@ -937,7 +946,7 @@ export default function WatchEpisodeClient({
 
       {/* SERVERS */}
       <div className="servers">
-        {currentEpisode.servers.map((server) => (
+        {currentEpisode.servers.map((server: Server) => (
           <button
             key={server.name}
             className={server.name === activeServer.name ? "active" : ""}

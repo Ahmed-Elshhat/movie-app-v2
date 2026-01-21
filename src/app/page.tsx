@@ -54,9 +54,9 @@ export default function HomePage() {
 
       {/* GRID */}
       <section className="movies-grid">
-        {movies.map((movie) => (
+        {movies.map((movie, index) => (
           <Link
-            key={movie.id}
+            key={index}
             href={`/watch/${movie.slug}`}
             className="movie-card"
           >
